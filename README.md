@@ -1,9 +1,5 @@
 # Syncfusion Gantt Chart - Virtual Scrolling with Large Dataset
 
-A production-ready Syncfusion Gantt Chart demonstration optimized for handling large datasets with virtual scrolling. Built with React 19.2.8, Vite 8.3.0, and ready for Azure App Service deployment.
-
-## Overview
-
 This project showcases a high-performance Gantt chart implementation that efficiently handles 5K, 10K, and 25K task records through row and timeline virtualization. It includes realistic project hierarchies, multi-type dependencies, resource allocation, and comprehensive performance metrics to measure render efficiency.
 
 ## Features
