@@ -1,94 +1,147 @@
-# Syncfusion Gantt Chart - POC Demo
+# Syncfusion Gantt Chart - Virtual Scrolling with Large Dataset
 
-A production-ready Syncfusion Gantt Chart demonstration built with React 19.2.8, Vite 8.3.0, and optimized for Azure App Service deployment.
+A production-ready Syncfusion Gantt Chart demonstration optimized for handling large datasets with virtual scrolling. Built with React 19.2.8, Vite 8.3.0, and ready for Azure App Service deployment.
+
+## Overview
+
+This project showcases a high-performance Gantt chart implementation that efficiently handles 5K, 10K, and 25K task records through row and timeline virtualization. It includes realistic project hierarchies, multi-type dependencies, resource allocation, and comprehensive performance metrics to measure render efficiency.
 
 ## Features
 
-✅ **High-Performance Gantt Chart**
-- Hierarchical task structure (1 parent + 49 children per group)
-- Row and timeline virtualization for handling large datasets
-- Support for 5K, 10K, and 25K records
+### 1. **Project and Task Management**
+Create, edit, delete, and organize tasks with hierarchical structure support
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    editSettings={{
+      allowAdding: true,
+      allowEditing: true,
+      allowDeleting: true,
+      mode: 'Dialog'
+    }}
+    taskFields={{
+      id: 'TaskID',
+      name: 'TaskName',
+      parentID: 'ParentID'
+    }}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Managing Tasks in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/managing-tasks/)
 
-✅ **Long-Range Dependencies**
-- 4 dependency types: FS (Finish-to-Start), SS (Start-to-Start), FF (Finish-to-Finish), SF (Start-to-Finish)
-- 14 strategic dependencies per parent group
-- Realistic project relationship visualization
+### 2. **Task Allocation**
+Resource assignment support for single and multiple resource assignments
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    resources={resourceData}
+    resourceFields={{
+      id: 'ResourceID',
+      name: 'ResourceName'
+    }}
+    taskFields={{
+      resourceInfo: 'ResourceID'
+    }}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Resources in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/resources/)
 
-✅ **Resource Allocation**
-- 8 sample resources with unit capacity
-- Single and multiple resource assignment per task
-- Resource management through Task Information dialog
-- Resource editing support with drag-and-drop
+### 3. **Task Dependencies**
+Predecessor-based dependency visualization with multiple dependency types (FS, SS, FF, SF)
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    taskFields={{
+      dependency: 'Dependency'  // Format: "2FS", "3SS", "4FF", "5SF"
+    }}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Task Dependency in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/task-dependency/)
 
-✅ **Performance Metrics**
-- High-resolution timing using `performance.now()` (microseconds precision)
-- Real-time render time measurement
-- Expand All / Collapse All operation tracking
-- Metrics display in seconds (3 decimal precision)
+### 4. **Timeline Tracking**
+Start Date, End Date, Duration, and Progress display with real-time updates
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    taskFields={{
+      startDate: 'StartDate',
+      endDate: 'EndDate',
+      duration: 'Duration',
+      progress: 'Progress'
+    }}
+    columns={[
+      { field: 'TaskName', headerText: 'Task Name' },
+      { field: 'StartDate', headerText: 'Start Date' },
+      { field: 'EndDate', headerText: 'End Date' },
+      { field: 'Duration', headerText: 'Duration' },
+      { field: 'Progress', headerText: 'Progress' }
+    ]}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Timeline in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/timeline/)
 
-✅ **Editing & Operations**
-- Add, Edit, Delete task operations
-- Taskbar editing with drag-drop
-- Dialog-based task information editor
-- Toolbar with Expand All/Collapse All buttons
+### 5. **Dialog-based Editing**
+Built-in dialog editing mode for add, edit, and delete operations
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    editSettings={{
+      mode: 'Dialog',
+      allowEditing: true,
+      allowAdding: true,
+      allowDeleting: true
+    }}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Editing Tasks in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/editing/)
 
-✅ **Azure Deployment Ready**
-- Single-page application (SPA) without routing
-- Dynamic base path detection via `basePath.ts`
-- Web.config for Azure App Service URL rewriting
-- Gzip compression enabled
+### 6. **Large Datasets**
+Row Virtualization for seamless handling of large task datasets (5K, 10K, 25K records)
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    enableVirtualization={true}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Virtual Scroll in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/virtual-scroll/)
 
-## Quick Start
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-
-### Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-Visit `http://localhost:5173/` in your browser.
-
-### Building for Production
-
-```bash
-# Build optimized bundle
-npm run build
-
-# Preview production build locally
-npm run preview
-```
-
-The `dist/` folder is ready for deployment to Azure App Service.
+### 7. **Large Timeline Ranges**
+Timeline Virtualization for efficient rendering of extended date ranges
+- **Code Snippet:**
+  ```jsx
+  <GanttComponent
+    enableTimelineVirtualization={true}
+  />
+  ```
+- **File:** `src/components/Gantt.jsx`
+- **Documentation:** [Virtual Scroll in React Gantt Chart Component](https://www.syncfusion.com/documentation/react/gantt/virtual-scroll/)
 
 ## Project Structure
 
 ```
-my-gantt-app/
+virtual-scrolling-large-dataset/
 ├── src/
 │   ├── components/
-│   │   ├── Gantt.jsx         # Main Gantt component with data generation
-│   │   └── Home.jsx          # Home page layout
-│   ├── App.jsx               # App container
-│   ├── basePath.ts           # Dynamic base path detection
-│   ├── main.jsx              # React entry point with BrowserRouter
-│   ├── index.css             # Global styles
-│   ├── App.css               # App styles
-│   └── Home.css              # Home page styles
+│   │   └── Gantt.jsx              # Main Gantt component with virtual scrolling
+│   ├── App.jsx                    # Root application component
+│   ├── App.css                    # Application styles
+│   ├── basePath.ts                # Dynamic base path detection for Azure
+│   ├── index.css                  # Global styles
+│   ├── main.jsx                   # React entry point
+│   └── vite-env.d.ts              # Vite environment types
 ├── public/
-│   └── web.config            # Azure App Service configuration
-├── dist/                     # Production build (generated)
-├── index.html                # HTML template
-├── vite.config.js            # Vite configuration
-├── package.json              # Dependencies
-└── AZURE_DEPLOYMENT.md       # Azure deployment guide
+│   └── web.config                 # Azure App Service IIS configuration
+├── dist/                          # Production build output (generated)
+├── index.html                     # HTML template
+├── vite.config.js                 # Vite configuration
+├── package.json                   # Dependencies and scripts
+├── README.md                       # This file
+└── .gitignore                      # Git ignore rules
 ```
 
 ## Technology Stack
@@ -98,6 +151,59 @@ my-gantt-app/
 | React | 19.2.8 | UI framework |
 | Vite | 8.3.0 | Build tool & dev server |
 | Syncfusion Gantt | 35.1.37 | Gantt chart component |
+| Node.js | 18+ | Runtime environment |
+
+## How to Run
+
+### Prerequisites
+- **Node.js:** 18 or higher
+- **npm:** 9+ or **yarn** 3+
+
+### Development Setup
+
+1. **Clone or navigate to the project directory:**
+   ```bash
+   cd virtual-scrolling-large-dataset
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5173/`
+
+4. **Open in browser:**
+   - Navigate to the local URL shown in the terminal
+   - Select dataset size (5K, 10K, or 25K tasks) from the interface
+   - Observe performance metrics for Expand All / Collapse All operations
+
+### Building for Production
+
+1. **Build optimized bundle:**
+   ```bash
+   npm run build
+   ```
+
+2. **Preview production build locally:**
+   ```bash
+   npm run preview
+   ```
+
+3. **Deploy to Azure:**
+   - The `dist/` folder is ready for deployment to Azure App Service
+   - Ensure `web.config` is included in the deployment
+
+### Available npm Scripts
+
+- `npm run dev` — Start development server with hot reload
+- `npm run build` — Create optimized production build
+- `npm run preview` — Preview production build locally
+- `npm run lint` — Run linter (oxlint)
 | React Router | 8.3.0 | Client-side routing |
 | Tailwind CSS Theme | Latest | Syncfusion styling |
 
